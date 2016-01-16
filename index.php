@@ -21,6 +21,11 @@
         <div class="ajax-loading-container" ajax-pending ng-class="class"><div class="ajax-loading"><img src="img/spinner.gif" /></div></div>
         <div class="container" ng-controller="filebrowser">
             <h3>File Browser</h3><br />
+            <div class="columnhead">
+                <div class="column1">Filename</div>
+                <div class="column2">Modified Date</div>
+                <div class="column3">Size</div>
+            </div>
             <directory dir="."></directory>
         </div>
     </body>

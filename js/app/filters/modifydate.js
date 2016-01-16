@@ -11,13 +11,17 @@ angular.module('app')
             
             d.setUTCSeconds(date);
             
+            var hours = d.getHours();
+            var minutes = d.getMinutes();
+            minutes = (minutes >= 10 ? minutes : '0' + minutes.toString());
+            
             if(d.getDate() === today.getDate() &&
                d.getMonth() === today.getMonth() &&
                d.getFullYear() === today.getFullYear()){
-                return 'Today, ' + d.getHours() + ':' + d.getMinutes() + ' ' + (d.getHours() >= 12 ? 'PM' : 'AM');
+                return 'Today, ' + hours + ':' + minutes + ' ' + (hours >= 12 ? 'PM' : 'AM');
             }
             
             return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + 
-                    ', ' + d.getHours() + ':' + d.getMinutes() + ' ' + (d.getHours() >= 12 ? 'PM' : 'AM');
+                    ', ' + hours + ':' + minutes + ' ' + (hours >= 12 ? 'PM' : 'AM');
         };
     });

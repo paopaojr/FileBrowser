@@ -23,6 +23,15 @@ body{
     color: grey;
     text-align: right;
 }
+.columnhead{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.columnhead > .column1,
+.columnhead > .column2,
+.columnhead > .column3{
+    color: #000;
+}
 ul {
     padding-left: 20px;
 }
