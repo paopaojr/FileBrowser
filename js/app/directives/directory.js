@@ -4,27 +4,29 @@ angular.module('app')
         restrict: 'E',
         scope: {
             dir: '@',
-            indent: '@',
         },
         template: '<ul>\
-                    <li ng-repeat="file in files" ng-class="class" ng-if="file.type == \'dir\'">\
-                        <div ng-click="onToggleDirClick($event, file.name)">\
+                    <li ng-repeat="file in files | filter:{type:\'dir\'}" ng-class="class" ng-click="onToggleDirClick($event, file.name)">\
+                        <div>\
                             <div class="column1">{{file.name}}</div>\
                             <div class="column2">{{file.modify | modifydate}}</div>\
                             <div class="column3">--</div>\
                         </div>\
                     </li>\
-                    <li ng-repeat="file in files" class="file" ng-if="file.type == \'file\'">\
+                    <li ng-repeat="file in files | filter:{type:\'file\'}" class="file">\
                         <file name="{{file.name}}" modify="{{file.modify}}" size="{{file.size}}" path="{{file.path}}"></file>\
                     </li>\
                 </ul>',
+            
         link: function(scope, element, attrs) {
             scope.files = [];
             scope.class = 'dir';
             
+            //clean up on delete this element with all children
             element.on('$destroy',function() {
                 scope.files = [];
             });
+           
             
             scope.getFiles = function(path){
                 $http.get(API_LISTFILE_URL + '?path=' + path).then(function(response) {
@@ -35,21 +37,21 @@ angular.module('app')
             scope.onToggleDirClick = function($event, dir){
                 $event.stopPropagation();
                 
-                var div = angular.element($event.currentTarget);
-                var child = div.find('directory');
+                var li = angular.element($event.currentTarget);
+                var child = li.find('directory');
                 if(child.length === 0){
                     scope.onExpandFolder($event, dir);
-                    scope.class = 'dir active';
+                    li.scope().class = 'dir active';
                 }else{
                     scope.onCollapseFolder($event);
-                    scope.class = 'dir';
+                    li.scope().class = 'dir';
                 }
             }
             
             scope.onExpandFolder = function($event, dir){
-                var div = angular.element($event.currentTarget);
+                var li = angular.element($event.currentTarget);
                 var html = '<directory dir="' + scope.dir + '/' + dir + '"></directory>';
-                div.append($compile(html)(scope));
+                li.append($compile(html)(scope));
             }
             
             scope.onCollapseFolder = function($event){

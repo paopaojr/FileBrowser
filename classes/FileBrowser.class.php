@@ -13,6 +13,8 @@ class FileBrowser
         $iterator = new DirectoryIterator(BROWSE_URL . $path);
         $result = array();
         
+        //WARNING this doesn't work on very wierd file name, for English file name it should be fine.
+        //try-catch will still make it
         foreach ($iterator as $fileInfo) {
             if($fileInfo->isDot()){
                 continue;
@@ -26,15 +28,19 @@ class FileBrowser
                 $type = 'dir';
             }
             
-            $info = array(
-                'name' => $fileInfo->getFilename(),
-                'path' => $fileInfo->getPathname(),
-                'size' => $fileInfo->getSize(),
-                'modify' => $fileInfo->getMTime(),
-                'type' => $type,
-            );
-            
-            $result []= $info;
+            try{
+                $info = array(
+                    'name' => $fileInfo->getFilename(),
+                    'path' => $fileInfo->getPathname(),
+                    'size' => $fileInfo->getSize(),
+                    'modify' => $fileInfo->getMTime(),
+                    'type' => $type,
+                );
+                
+                $result []= $info;
+            }catch(Exception $e){
+                //TODO place error/warning log here
+            }
         } 
         
         return json_encode($result);

@@ -19,7 +19,7 @@ class FileBrowserTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(!$top_level && FileBrowser::getFolderContent('..'));
         
         //pick random file outside root scope and try to download
-        //note this test only one level higher
+        //NOTE: this test only go one level higher for now
         $iterator = new DirectoryIterator(BROWSE_URL . '..');
         foreach ($iterator as $fileInfo) {
             if($fileInfo->isFile() === true){
