@@ -29,7 +29,7 @@ angular.module('app')
            
             
             scope.getFiles = function(path){
-                $http.get(API_LISTFILE_URL + '?path=' + path).then(function(response) {
+                $http.get(API_LISTFILE_URL + '?path=' + encodeURIComponent(path)).then(function(response) {
                     scope.files = response.data;
                 });
             }

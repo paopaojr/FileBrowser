@@ -20,7 +20,7 @@ angular.module('app')
             element.on('$destroy',function() {
             });
             
-            element.find('a').attr('href', API_DOWNLOAD_URL + '?path=' + scope.path);
+            element.find('a').attr('href', API_DOWNLOAD_URL + '?path=' + encodeURIComponent(scope.path));
         }
     };
 });
