@@ -5,8 +5,8 @@ require_once 'config.php';
 class FileBrowser
 {
     public static function getFolderContent($path){
-        //prevent transverse above $path dir         
-        if(strpos(realpath(BROWSE_URL . $path), realpath(BROWSE_URL)) === false){
+        //prevent transverse above BROWSE_URL dir         
+        if(strpos(realpath(BROWSE_URL . $path), realpath(BROWSE_URL)) !== 0){
             return false;
         }
         
@@ -28,7 +28,7 @@ class FileBrowser
             
             $info = array(
                 'name' => $fileInfo->getFilename(),
-                'path' => $fileInfo->getPathName(),
+                'path' => $path . '/' . $fileInfo->getFilename(),
                 'size' => $fileInfo->getSize(),
                 'modify' => $fileInfo->getMTime(),
                 'type' => $type,

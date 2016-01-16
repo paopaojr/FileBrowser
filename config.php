@@ -1,3 +1,3 @@
 <?php
 
-define('BROWSE_URL', 'D:\\Drivers\\');
+define('BROWSE_URL', $_SERVER['DOCUMENT_ROOT'] . '\\' . 'FileBrowser');
