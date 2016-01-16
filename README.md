@@ -2,9 +2,8 @@
 Simple file browser webapp using PHP, AngularJS
 
 <b>Installation:</b><br />
-1. Create folder name "FileBrowser" inside XAMPP or MAMP server htdoc folder.<br />
-2. Copy all files to the folder that just created<br />
-3. Edit config.php "BROWSE_URL" constant, make it point to folder you want. <b>MAKE SURE adding trailing slash to that value!</b><br />
+1. Clone to "FileBrowser" inside XAMPP or MAMP server htdocs folder.<br />
+2. Edit config.php "BROWSE_URL" constant, make it point to folder you want. <b>MAKE SURE adding trailing slash to that value!</b><br />
 
-<b>Bugs</b></br>
-- Very big File size doesn't show collectly, the number is overflow after 2147483648L<br />
+<b>Limited</b></br>
+- For X86 version of PHP, very big file size don't show correctly, the number is overflow after 2147483648L<br />

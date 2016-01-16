@@ -60,12 +60,20 @@ class FileBrowser
         if(is_file($filepath)){
             $size = filesize($filepath);
             
+            if (function_exists('finfo_open')) {
+                $finfo = finfo_open(FILEINFO_MIME_TYPE);
+                $mimetype = finfo_file($finfo, $filepath);
+                finfo_close($finfo);
+            } else {
+                $mimetype = 'application/octet-stream';
+            }
+            
             //clear all output buffer
             ob_end_clean();      
 
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
             header('Cache-Control: private', false);
-            header("Content-Type: application/octet-stream");
+            header("Content-Type: $mimetype");
             header("Content-Disposition: attachment; filename=\"".basename($filepath).'"');
             header("Content-length: ".$size);
             header("Content-Transfer-Encoding: binary");

@@ -10,7 +10,7 @@ angular.module('app')
                         <div>\
                             <div class="column1">{{file.name}}</div>\
                             <div class="column2">{{file.modify | modifydate}}</div>\
-                            <div class="column3">--</div>\
+                            <div class="column3">- -</div>\
                         </div>\
                     </li>\
                     <li ng-repeat="file in files | filter:{type:\'file\'}" class="file">\
