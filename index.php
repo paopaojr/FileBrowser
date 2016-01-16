@@ -13,11 +13,14 @@
         <script src="js/app/controllers/filebrowser.js" type="text/javascript"></script>
         <script src="js/app/directives/directory.js" type="text/javascript"></script>
         <script src="js/app/directives/file.js" type="text/javascript"></script>
+        <script src="js/app/directives/ajax_pending.js" type="text/javascript"></script>
         <script src="js/app/filters/filesize.js" type="text/javascript"></script>
         <script src="js/app/filters/modifydate.js" type="text/javascript"></script>
     </head>
-    <body>
-        <div class="container" ng-app="app" ng-controller="filebrowser">
+    <body ng-app="app" >
+        <div class="ajax-loading-container" ajax-pending ng-class="class"><div class="ajax-loading"><img src="img/spinner.gif" /></div></div>
+        <div class="container" ng-controller="filebrowser">
+            <h3>File Browser</h3><br />
             <directory dir="."></directory>
         </div>
     </body>

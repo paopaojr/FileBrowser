@@ -1,9 +1,13 @@
 angular.module('app')
-    .directive('file', function() {
+    .directive('file', function(API_DOWNLOAD_URL) {
     return {
         restrict: 'E',
         
-        template: '<a href="{{path}}">{{name}} - {{modify | modifydate}} - {{size | filesize}}</a>',
+        template: '<a href="" download>\
+                        <div class="column1">{{name}}</div>\
+                        <div class="column2">{{modify | modifydate}}</div>\
+                        <div class="column3">{{size | filesize}}</div>\
+                    </a>',
         scope: {
             name: '@',
             path: '@',
@@ -11,7 +15,10 @@ angular.module('app')
             modify: '@',
         },
         link: function(scope, element, attrs) {
-
+            element.on('$destroy',function() {
+            });
+            
+            element.find('a').attr('href', API_DOWNLOAD_URL + '?path=' + scope.path);
         }
     };
 });

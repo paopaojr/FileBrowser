@@ -10,7 +10,23 @@ class FileBrowserTest extends PHPUnit_Framework_TestCase
     }
     
     public function testNoTranverseOutsideRoot(){
-        $this->assertFalse(FileBrowser::getFolderContent('..'));
+        $top_level = false;
+        //in this case, it it top level directory - cannot be tranverse back
+        if(strcmp(realpath(BROWSE_URL . '..'), realpath(BROWSE_URL)) === 0){
+            $top_level = true;
+        }
+        
+        $this->assertFalse(!$top_level && FileBrowser::getFolderContent('..'));
+        
+        //pick random file outside root scope and try to download
+        //note this test only one level higher
+        $iterator = new DirectoryIterator(BROWSE_URL . '..');
+        foreach ($iterator as $fileInfo) {
+            if($fileInfo->isFile() === true){
+                $this->assertFalse(!$top_level && FileBrowser::fileDownload($fileInfo->getPathname(), true));
+                break;
+            }
+        }
     }
     
     public function testValidResultFiles(){

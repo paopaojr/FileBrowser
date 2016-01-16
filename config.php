@@ -1,3 +1,4 @@
 <?php
 
-define('BROWSE_URL', $_SERVER['DOCUMENT_ROOT'] . '\\' . 'FileBrowser');
+//do not forget to add trailing slash!
+define('BROWSE_URL', 'D:/' . '/');

@@ -7,8 +7,17 @@ angular.module('app')
             }
 
             var d = new Date(0);
+            var today = new Date();
+            
             d.setUTCSeconds(date);
             
-            return d.toDateString();
+            if(d.getDate() === today.getDate() &&
+               d.getMonth() === today.getMonth() &&
+               d.getFullYear() === today.getFullYear()){
+                return 'Today, ' + d.getHours() + ':' + d.getMinutes() + ' ' + (d.getHours() >= 12 ? 'PM' : 'AM');
+            }
+            
+            return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate() + 
+                    ', ' + d.getHours() + ':' + d.getMinutes() + ' ' + (d.getHours() >= 12 ? 'PM' : 'AM');
         };
     });
